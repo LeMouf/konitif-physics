@@ -13,5 +13,11 @@ Before release:
    environment;
 6. publish that verified archive through GitHub Actions OIDC.
 
+Publication additionally requires the repository variable
+`PHYSICS_NPM_PUBLISH_ENABLED=true`. Future tags trigger the protected workflow
+directly. Because the initial `v0.284.1` tag predates that workflow, its first
+publication uses the manual workflow input with exactly `v0.284.1`; the
+workflow checks out and publishes the tagged source rather than `main`.
+
 No workflow may download an engine, browser, robot asset or vendor adapter.
 The release proves the headless package boundary only.
