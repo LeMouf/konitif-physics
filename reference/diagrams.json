@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "package": "@konitif/physics",
+  "diagrams": [
+    {
+      "id": "command-to-observation",
+      "title": "From command to simulated observation",
+      "kind": "lifecycle",
+      "summary": "The service admits a command, the backend produces a simulated effect, and a distinct observation is published.",
+      "nodes": [
+        {
+          "id": "profile",
+          "label": "Authored profile",
+          "description": "The host supplies interpretable parameters."
+        },
+        {
+          "id": "command",
+          "label": "Admitted command",
+          "description": "The service validates and forwards a request."
+        },
+        {
+          "id": "backend",
+          "label": "Explicit backend",
+          "description": "The selected engine computes one step.",
+          "tone": "runtime"
+        },
+        {
+          "id": "simulated",
+          "label": "Simulated effect",
+          "description": "The simulated world state evolves."
+        },
+        {
+          "id": "observation",
+          "label": "Observation",
+          "description": "A correlated reading is exposed.",
+          "tone": "observation"
+        }
+      ],
+      "edges": [
+        {
+          "from": "profile",
+          "to": "command"
+        },
+        {
+          "from": "command",
+          "to": "backend"
+        },
+        {
+          "from": "backend",
+          "to": "simulated"
+        },
+        {
+          "from": "simulated",
+          "to": "observation"
+        }
+      ],
+      "caption": "A simulated observation alone never confirms an effect on a real device."
+    }
+  ]
+}

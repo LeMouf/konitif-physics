@@ -30,7 +30,8 @@
     "src",
     "README.md",
     "LICENSE.md",
-    "tsconfig.json"
+    "tsconfig.json",
+    "reference"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",

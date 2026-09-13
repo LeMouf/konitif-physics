@@ -36,11 +36,12 @@ if (process.platform === 'win32') {
 const [packed] = JSON.parse(output);
 const files = packed.files.map(file => file.path).sort();
 for (const file of files) {
-  assert.match(file, /^(dist\/|src\/|package\.json$|README\.md$|LICENSE\.md$|tsconfig\.json$)/);
+  assert.match(file, /^(dist\/|src\/|reference\/|package\.json$|README\.md$|LICENSE\.md$|tsconfig\.json$)/);
 }
 for (const file of [
   'dist/index.js', 'dist/index.d.ts', 'dist/worker.js', 'dist/worker.d.ts',
-  'src/index.ts', 'src/worker.ts', 'README.md', 'LICENSE.md', 'package.json'
+  'src/index.ts', 'src/worker.ts', 'README.md', 'LICENSE.md', 'package.json',
+  'reference/README.md', 'reference/catalog.json', 'reference/diagrams.json'
 ]) assert.ok(files.includes(file), file);
 
 const archive = join(evidence, packed.filename);
