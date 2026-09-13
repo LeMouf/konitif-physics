@@ -8,7 +8,7 @@ test('the package and lock identify one dependency-free public runtime', () => {
   const manifest = json('package.json');
   const lock = json('package-lock.json');
   assert.equal(manifest.name, '@konitif/physics');
-  assert.equal(manifest.version, '0.284.1');
+  assert.equal(manifest.version, '0.284.2');
   assert.equal(manifest.private, false);
   assert.deepEqual(manifest.dependencies ?? {}, {});
   assert.deepEqual(manifest.devDependencies, { typescript: '5.9.3' });
