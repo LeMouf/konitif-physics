@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0.0",
+  "package": "@konitif/physics",
+  "intent": "Coordinate an explicit physics backend without conflating command, simulation, observation, and real effect.",
+  "clusters": [
+    {
+      "id": "service-lifecycle",
+      "title": "Service lifecycle",
+      "summary": "Selection, loading, commands, simulation steps, and release.",
+      "authority": "Local coordination of the selected backend.",
+      "owns": [
+        "service state",
+        "command admission"
+      ],
+      "doesNotOwn": [
+        "physics engine",
+        "clock",
+        "robot model"
+      ],
+      "workflow": [
+        "Select",
+        "Load",
+        "Command",
+        "Step",
+        "Release"
+      ],
+      "sources": [
+        "src/PhysicsService.ts",
+        "src/NoopPhysicsBackend.ts"
+      ]
+    },
+    {
+      "id": "backend-contracts",
+      "title": "Backend contracts",
+      "summary": "Engine-independent ports and data shapes.",
+      "authority": "Integration contract supplied to the host.",
+      "owns": [
+        "command shape",
+        "observation shape"
+      ],
+      "doesNotOwn": [
+        "engine implementation",
+        "product policy"
+      ],
+      "workflow": [
+        "Declare",
+        "Provide",
+        "Adapt"
+      ],
+      "sources": [
+        "src/contracts.ts",
+        "src/colliderGeometry.ts"
+      ]
+    },
+    {
+      "id": "profiles-observations",
+      "title": "Profiles and observations",
+      "summary": "Authored inputs for simulation and observation roles.",
+      "authority": "Scope description, distinct from a measurement.",
+      "owns": [
+        "authored profiles",
+        "body roles"
+      ],
+      "doesNotOwn": [
+        "measured contact",
+        "real-world confirmation"
+      ],
+      "workflow": [
+        "Describe",
+        "Interpret",
+        "Observe"
+      ],
+      "sources": [
+        "src/simulationProfile.ts",
+        "src/observationProfile.ts"
+      ]
+    },
+    {
+      "id": "worker-transport",
+      "title": "Worker transport",
+      "summary": "Explicit adaptation of the backend protocol to a supplied worker.",
+      "authority": "Lifecycle of the transport and borrowed worker.",
+      "owns": [
+        "request correlation",
+        "worker termination"
+      ],
+      "doesNotOwn": [
+        "worker creation",
+        "global scheduler"
+      ],
+      "workflow": [
+        "Connect",
+        "Exchange",
+        "Cancel",
+        "Terminate"
+      ],
+      "sources": [
+        "src/PhysicsWorkerProtocol.ts",
+        "src/PhysicsWorkerBackendAdapter.ts"
+      ]
+    }
+  ]
+}
