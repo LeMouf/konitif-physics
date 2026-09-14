@@ -5,7 +5,7 @@ import { PhysicsWorkerBackendAdapter } from '../dist/worker.js';
 
 test('the default service remains explicitly inactive', async () => {
   const service = new PhysicsService();
-  await service.loadRobot({ id: 'fixture', kind: 'custom' });
+  await service.loadSubject({ id: 'fixture', kind: 'custom' });
   service.setJointTarget('joint', { value: 0.5 });
   service.step(1 / 60);
   assert.deepEqual(service.snapshot(), {
@@ -42,7 +42,7 @@ test('an injected backend receives only explicit lifecycle and step commands', a
   class Backend extends NoopPhysicsBackend {
     engine = 'mujoco';
     async init() { calls.push('init'); }
-    async loadRobot(source) { calls.push(`load:${source.id}`); }
+    async loadSubject(source) { calls.push(`load:${source.id}`); }
     step(dt) { calls.push(`step:${dt}`); }
     dispose() { calls.push('dispose'); }
   }
@@ -51,7 +51,7 @@ test('an injected backend receives only explicit lifecycle and step commands', a
     backendFactories: { mujoco: () => new Backend() }
   });
   await service.setEngine('mujoco');
-  await service.loadRobot({ id: 'fixture', kind: 'custom' });
+  await service.loadSubject({ id: 'fixture', kind: 'custom' });
   service.step(0.02);
   service.dispose();
   assert.deepEqual(calls, ['init', 'load:fixture', 'step:0.02', 'dispose']);

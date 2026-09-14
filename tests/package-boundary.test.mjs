@@ -8,7 +8,7 @@ test('the package and lock identify one dependency-free public runtime', () => {
   const manifest = json('package.json');
   const lock = json('package-lock.json');
   assert.equal(manifest.name, '@konitif/physics');
-  assert.equal(manifest.version, '0.284.2');
+  assert.equal(manifest.version, '0.285.0');
   assert.equal(manifest.private, false);
   assert.deepEqual(manifest.dependencies ?? {}, {});
   assert.deepEqual(manifest.devDependencies, { typescript: '5.9.3' });
@@ -24,6 +24,7 @@ test('the source closure imports only its own relative modules', () => {
   assert.equal(files.length, 12);
   for (const file of files) {
     const source = readFileSync(new URL(file, root), 'utf8');
+    assert.doesNotMatch(source, /\bRobotPhysicsSource\b|\bloadRobot\b/, file);
     for (const match of source.matchAll(/(?:from|import\s*\()\s*['"]([^'"]+)['"]/g)) {
       assert.match(match[1], /^\.\//, `${file}: ${match[1]}`);
     }

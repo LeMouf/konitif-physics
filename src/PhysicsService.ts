@@ -12,7 +12,7 @@ import type {
   PhysicsServiceSnapshot,
   PhysicsServicePort,
   PhysicsVector3,
-  RobotPhysicsSource
+  PhysicsSubjectSource
 } from './contracts.js';
 import { NoopPhysicsBackend } from './NoopPhysicsBackend.js';
 
@@ -27,7 +27,7 @@ export class PhysicsService implements PhysicsServicePort {
   private engine: PhysicsEngineType = 'none';
   private enabled: boolean;
   private initialized = false;
-  private loadedSource: RobotPhysicsSource | null = null;
+  private loadedSource: PhysicsSubjectSource | null = null;
   private backendLoadedSourceId: string | null = null;
   private initializationPromise: Promise<void> | null = null;
   private lifecycleRevision = 0;
@@ -103,7 +103,7 @@ export class PhysicsService implements PhysicsServicePort {
       const source = this.loadedSource;
 
       if (source) {
-        await backend.loadRobot(source);
+        await backend.loadSubject(source);
 
         if (
           lifecycleRevision === this.lifecycleRevision &&
@@ -156,14 +156,14 @@ export class PhysicsService implements PhysicsServicePort {
     this.initialized = true;
   }
 
-  async loadRobot(source: RobotPhysicsSource): Promise<void> {
+  async loadSubject(source: PhysicsSubjectSource): Promise<void> {
     this.loadedSource = source;
     this.backendLoadedSourceId = null;
     await this.initializationPromise;
     await this.init();
     const backend = this.backend;
     const lifecycleRevision = this.lifecycleRevision;
-    await backend.loadRobot(source);
+    await backend.loadSubject(source);
 
     if (
       lifecycleRevision === this.lifecycleRevision &&

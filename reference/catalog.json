@@ -15,7 +15,7 @@
       "doesNotOwn": [
         "physics engine",
         "clock",
-        "robot model"
+        "model asset"
       ],
       "workflow": [
         "Select",
@@ -40,7 +40,7 @@
       ],
       "doesNotOwn": [
         "engine implementation",
-        "product policy"
+        "domain policy"
       ],
       "workflow": [
         "Declare",

@@ -19,13 +19,14 @@ export interface PhysicsQuaternion {
   w: number;
 }
 
-export interface RobotPhysicsSource {
+/** Authored source for any physical subject admitted by a backend. */
+export interface PhysicsSubjectSource {
   id: string;
   kind: PhysicsSourceKind;
   label?: string;
   url?: string;
   sourceText?: string;
-  visualRobotId?: string | null;
+  visualSubjectId?: string | null;
   metadata?: PhysicsMetadata;
 }
 
@@ -98,7 +99,7 @@ export interface PhysicsBackendDiagnostic {
 export interface PhysicsBackend {
   readonly engine: PhysicsEngineType;
   init(): Promise<void>;
-  loadRobot(source: RobotPhysicsSource): Promise<void>;
+  loadSubject(source: PhysicsSubjectSource): Promise<void>;
   step(dt: number): void;
   /** Advances one explicit simulation slice and resolves with its resulting state. */
   stepAndWait?(dt: number): Promise<void>;
@@ -138,7 +139,7 @@ export interface PhysicsServiceSnapshot {
 export interface PhysicsServicePort {
   setEnabled(enabled: boolean): void;
   setEngine(engine: PhysicsEngineType): Promise<void>;
-  loadRobot(source: RobotPhysicsSource): Promise<void>;
+  loadSubject(source: PhysicsSubjectSource): Promise<void>;
   step(dt: number): void;
   /** Resolves when the explicit simulation step has completed. */
   stepAndWait(dt: number): Promise<void>;
