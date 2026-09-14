@@ -9,7 +9,7 @@ import type {
   PhysicsKinematicPoseOptions,
   PhysicsRuntimeConfig,
   PhysicsVector3,
-  RobotPhysicsSource
+  PhysicsSubjectSource
 } from './contracts.js';
 import type { PhysicsWorkerDeadlineHost, PhysicsWorkerPort } from './PhysicsWorkerHost.js';
 export type { PhysicsWorkerDeadlineHost, PhysicsWorkerPort } from './PhysicsWorkerHost.js';
@@ -74,10 +74,10 @@ export class PhysicsWorkerBackendAdapter implements PhysicsBackend {
     await this.request('init', this.initPayload);
   }
 
-  async loadRobot(source: RobotPhysicsSource): Promise<void> {
+  async loadSubject(source: PhysicsSubjectSource): Promise<void> {
     this.stepPending = false;
     this.queuedStepDt = null;
-    await this.request('loadRobot', source);
+    await this.request('loadSubject', source);
   }
 
   step(dt: number): void {

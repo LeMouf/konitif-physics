@@ -59,7 +59,7 @@ run(process.execPath, ['--input-type=module', '-e', `
   import { NoopPhysicsBackend, PhysicsService } from '@konitif/physics';
   import { PhysicsWorkerBackendAdapter } from '@konitif/physics/worker';
   const service = new PhysicsService();
-  await service.loadRobot({ id: 'external', kind: 'custom' });
+  await service.loadSubject({ id: 'external', kind: 'custom' });
   assert.equal(service.snapshot().loadedSourceId, 'external');
   assert.equal(new NoopPhysicsBackend().engine, 'none');
   assert.equal(typeof PhysicsWorkerBackendAdapter, 'function');

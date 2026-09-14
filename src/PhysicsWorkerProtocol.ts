@@ -2,7 +2,7 @@ import type { JointState, BodyTransform, PhysicsVector3, PhysicsBackendStatus } 
 
 export type PhysicsWorkerCommand =
   | 'init'
-  | 'loadRobot'
+  | 'loadSubject'
   | 'step'
   | 'stepAndWait'
   | 'synchronize'

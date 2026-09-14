@@ -8,7 +8,7 @@ import type {
   PhysicsKinematicPoseOptions,
   PhysicsRuntimeConfig,
   PhysicsVector3,
-  RobotPhysicsSource
+  PhysicsSubjectSource
 } from './contracts.js';
 
 export class NoopPhysicsBackend implements PhysicsBackend {
@@ -21,7 +21,7 @@ export class NoopPhysicsBackend implements PhysicsBackend {
     return undefined;
   }
 
-  async loadRobot(source: RobotPhysicsSource): Promise<void> {
+  async loadSubject(source: PhysicsSubjectSource): Promise<void> {
     this.loadedSourceId = source.id;
   }
 

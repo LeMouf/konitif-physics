@@ -13,5 +13,5 @@ npm test
 npm run verify:package
 ```
 
-No verification command may download a physics engine, robot asset or vendor
+No verification command may download a physics engine, model asset or vendor
 adapter. Follow `RELEASE.md` for publication.
