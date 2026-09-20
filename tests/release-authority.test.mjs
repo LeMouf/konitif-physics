@@ -12,17 +12,17 @@ test('release inputs bind the exact package version to its repository and tag', 
   assert.doesNotThrow(() => assertReleaseInputs(policy, manifest, lock, {
     GITHUB_REPOSITORY: 'LeMouf/konitif-physics',
     GITHUB_EVENT_NAME: 'push',
-    GITHUB_REF: 'refs/tags/v0.285.0'
+    GITHUB_REF: 'refs/tags/v0.285.1'
   }));
   assert.doesNotThrow(() => assertReleaseInputs(policy, manifest, lock, {
     GITHUB_REPOSITORY: 'LeMouf/konitif-physics',
     GITHUB_EVENT_NAME: 'workflow_dispatch',
-    PHYSICS_RELEASE_TAG: 'v0.285.0'
+    PHYSICS_RELEASE_TAG: 'v0.285.1'
   }));
   assert.throws(() => assertReleaseInputs(policy, manifest, lock, {
     GITHUB_REPOSITORY: 'LeMouf/konitif-physics',
     GITHUB_EVENT_NAME: 'workflow_dispatch',
-    PHYSICS_RELEASE_TAG: 'v0.285.1'
+    PHYSICS_RELEASE_TAG: 'v0.285.0'
   }));
 });
 
